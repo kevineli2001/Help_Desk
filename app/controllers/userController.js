@@ -28,6 +28,7 @@ async function getAuth(req, res) {
     // Restornamos los datos de la sesión
     return res.json({data: user})
   } catch (error) {
+    console.log (error)
     let errorName = 'request'
     let errors = {...getErrorFormat(errorName, 'Error al validar credenciales', errorName) }
     let errorKeys = [errorName]

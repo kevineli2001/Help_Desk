@@ -15,7 +15,7 @@ app.use('/api/uploads', express.static(path.join(__dirname, 'app' ,'uploads')))
 app.use('/api', routes.router)
 app.get('/', (req, res) => {
   const files = fs.readdirSync('./app/uploads')
-  return res.json({message: 'Hola cariño ❤️', files: files})
+  return res.json({message: 'Hola mundo ❤️', files: files})
 })
 // Middleware para servir archivos estáticos desde la carpeta 'imagenes'
 

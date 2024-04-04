@@ -1,0 +1,21 @@
+const userController = require('../controllers/userController')
+const userRoleController = require('../controllers/userRole.controller')
+const userStatusController = require('../controllers/userStatus.controller')
+const { userValidator } = require('../validators/userValidator')
+
+const { validateToken } = require('../middlewares/auth')
+const { User }  = require('../models/index')
+const router = require('express').Router()
+const { findId } = require('../middlewares/findId') 
+router.get('/', validateToken, userController.paginate)
+router.post('/filter', validateToken, userController.paginateAndFilter)
+router.post('/roles', validateToken, userRoleController.add)
+router.post('/status', validateToken, userStatusController.add)
+router.get('/roles/list', validateToken, userRoleController.getAll)
+router.get('/status/list', validateToken, userStatusController.getAll)
+router.post('/', validateToken, userValidator, userController.add)
+router.get('/find', validateToken, userController.findOne)
+router.put('/:id', validateToken, findId(User), userValidator, userController.update)
+router.delete('/:id', validateToken, userController.remove)
+
+module.exports = { router}
